@@ -1,0 +1,1 @@
+<a href="<?php echo e(route('reset.password', $token)); ?>">Reset Password</a><?php /**PATH E:\Xampp\htdocs\mydemoapp\resources\views/emails/forget-password.blade.php ENDPATH**/ ?>

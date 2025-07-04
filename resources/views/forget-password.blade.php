@@ -1,11 +1,23 @@
 @extends('layouts.default')
-@section("title", "Login")
+@section("title", "Forget Password")
 @section("content")
+
+
+
 
     <main class="mt-5">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-4">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <p>
+                                @foreach ($errors->all() as $error)
+                                    <small>{{ $error }}</small>
+                                @endforeach
+                            </p>
+                        </div>
+                    @endif
                     @if (session()->has('success'))
                         <div class="alert alert-success">
                             {{ session()->get('success') }}
@@ -17,10 +29,13 @@
                         </div>
                     @endif
                     <div class="card">
-                        <h3 class="card-header text-center">Login</h3>
+                        <h3 class="card-header text-center">Forget Password</h3>
                         <div class="card-body">
-                            <form action="{{ route('login.post') }}" method="post">
+                            <form action="{{ route('forget.password.post') }}" method="post">
                                 @csrf
+                                <div class="mb-4 mt-2">
+                                    <p>We will send link to your email, use that link to reset password!</p>
+                                </div>
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Email address</label>
                                     <input type="email" class="form-control" id="exampleInputEmail1"
@@ -31,22 +46,9 @@
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                     @endif
                                 </div>
-                                <div class="mb-3">
-                                    <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="Password"
-                                        id="exampleInputPassword1">
-                                </div>
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
+
                                 <div class="d-grid mx-auto">
-                                    <button type="submit" class="btn btn-dark btn-block">Login</button>
-                                </div>
-                                <div class="mt-4">
-                                    <p>You don't have an account? <a href="/register">Register now</a></p>
-                                </div>
-                                <div class="mt-3">
-                                    <p>Forgot your password? <a href="{{ route('forget.password') }}">Click here</a></p>
+                                    <button type="submit" class="btn btn-dark btn-block">Forget Password</button>
                                 </div>
                             </form>
                         </div>
@@ -55,5 +57,7 @@
             </div>
         </div>
     </main>
+
+
 
 @endsection
